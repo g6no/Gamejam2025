@@ -27,9 +27,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animated_sprite = $AnimatedSprite2D
 
 func _ready() -> void:
-	cur_char = character.MAN
-	cur_animation = man_animations
-	await DialogueManager.show_dialogue_balloon(load("res://dialogue1.dialogue"), "start")
+	cur_char = character.WOLF
+	cur_animation = wolf_animations
+	#await DialogueManager.show_dialogue_balloon(load("res://dialogue1.dialogue"), "start")
 
 #func change_animation() -> void:
 	#if character == character.MAN:

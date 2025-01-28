@@ -18,6 +18,17 @@ func _ready() -> void:
 @onready var place2: AnimatedSprite2D = $"/root/Game/Lab/UI/CanvasLayer/Place2"
 @onready var place3: AnimatedSprite2D = $"/root/Game/Lab/UI/CanvasLayer/Place3"
 
+@onready var platformer = $"/root/Game/Platformer"
+@onready var lab = $"/root/Game/Lab"
+@onready var lab_canvas = $"/root/Game/Lab/UI/CanvasLayer"
+
+@onready var win: Panel = $"/root/Game/Lab/UI/CanvasLayer/WinScreen"
+
+
+
+func clear_items():
+	for place in places:
+		place.set_frame(0)
 
 func set_frame(num) -> void:
 	if place1.frame == 0:
@@ -74,8 +85,7 @@ func _on_bottle_4_pressed() -> void:
 
 
 func _on_clear_pressed() -> void:
-	for place in places:
-		place.set_frame(0)
+	clear_items()
 
 
 func _on_combine_pressed() -> void:
@@ -84,3 +94,15 @@ func _on_combine_pressed() -> void:
 		combination.append(place.frame)
 	if combination == [1, 8, 10]:
 		print("Combination Found")
+		win.visible = true
+	else:
+		clear_items() 
+
+
+func _on_lab_entry_body_entered(body: Node2D) -> void:
+	print(body.name)
+	if body.name == "Player":
+		platformer.visible = false
+		lab.visible = true
+		lab_canvas.visible = true
+	

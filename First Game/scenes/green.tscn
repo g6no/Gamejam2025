@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6s7u1yiws41m"]
+
+[ext_resource type="Script" path="res://scripts/green.gd" id="1_a0mw1"]
+[ext_resource type="Texture2D" uid="uid://d0q2g65ahgok" path="res://assets/sprites/world_tileset.png" id="1_axjt7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msyne"]
+atlas = ExtResource("1_axjt7")
+region = Rect2(128, 128, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o0ues"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msyne")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ioojo"]
+radius = 8.0
+
+[node name="green" type="Area2D"]
+visibility_layer = 2
+collision_mask = 2
+script = ExtResource("1_a0mw1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o0ues")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D"]
+shape = SubResource("CircleShape2D_ioojo")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
