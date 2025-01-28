@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://1m8th1vcs1b4"]
+
+[ext_resource type="Texture2D" uid="uid://gx1xihdbejvu" path="res://assets/sprites/fruit.png" id="1_33wnk"]
+[ext_resource type="Script" path="res://scripts/animated_sprite_2d.gd" id="2_a2fig"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7il7e"]
+atlas = ExtResource("1_33wnk")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6675"]
+atlas = ExtResource("1_33wnk")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c35p2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7il7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6675")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_18ear"]
+radius = 6.0
+
+[node name="grapes" type="Area2D"]
+collision_mask = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-7, -2)
+scale = Vector2(1.25, 1)
+sprite_frames = SubResource("SpriteFrames_c35p2")
+script = ExtResource("2_a2fig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, -2)
+shape = SubResource("CircleShape2D_18ear")
+
+[connection signal="body_entered" from="." to="AnimatedSprite2D" method="_on_grapes_body_entered"]
